@@ -1,0 +1,11 @@
+canvas {
+  position: absolute;
+}
+
+#game {
+  z-index: 1;
+}
+
+#cover {
+  z-index: 2;
+}
