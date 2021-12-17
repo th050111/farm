@@ -1,5 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 canvas {
-  position: absolute;
+  position: fixed;
 }
 
 #game {
