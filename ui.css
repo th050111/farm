@@ -1,0 +1,11 @@
+.ui-container{
+    position: fixed;
+    z-index: 10;
+    background-color: red;
+
+    top: 10%;
+}
+
+.title-container{
+    display: flex;
+}

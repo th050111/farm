@@ -3,13 +3,15 @@ const coverCv = document.querySelector("#cover");
 const ctx = cv.getContext("2d");
 const coverCtx = coverCv.getContext("2d");
 
+
+
 //전역변수
 
 const cellsize = 50;
 const gameGrid = [];
 const constructions = [];
-const consturctionType = "field";
-const fieldType = "small";
+const constructionType = "small";
+const constructionTitle = "field";
 
 const constkurctionTypes = {
   field: {
@@ -193,8 +195,33 @@ function handleCover() {
   );
 }
 
-function handleUi(){
+const currentUi = "constructions";
 
+const uiList = {
+  constructions: {
+    size: {
+      height: screen.size.height * 0.2,
+      width: screen.size.width,
+    },
+    position: {
+      x: screen.position.x,
+      y: screen.position.y + screen.size.height,
+    },
+    itemSize: {
+      height: screen.size.height * 0.13,
+      width: screen.size.width * 0.13,
+    },
+  },
+};
+
+function handleUi() {
+  coverCtx.fillStyle = "red";
+  coverCtx.fillRect(
+    uiList[currentUi].position.x,
+    uiList[currentUi].position.y,
+    uiList[currentUi].size.width,
+    uiList[currentUi].size.height
+  );
 }
 
 class Construction {
@@ -235,6 +262,7 @@ function animate() {
   handleGame();
   handleGameGrid();
   handleConstructions();
+  handleUi();
 
   requestAnimationFrame(animate);
 }
@@ -249,6 +277,17 @@ window.addEventListener("resize", () => {
   canvasList.cover.size = {
     width: window.innerWidth,
     height: window.innerHeight,
+  };
+
+  uiList.constructions = {
+    size: {
+      height: screen.height * 0.2,
+      width: screen.width,
+    },
+    position: {
+      x: screen.position.x,
+      y: screen.position.y + screen.size.height,
+    },
   };
 });
 
@@ -296,10 +335,10 @@ function collision(first, second) {
 
 function checkMousePos() {
   if (
-    mouse.x <= 2500 &&
-    mouse.x >= 0 &&
-    mouse.y <= 2500 &&
-    mouse.y >= 0
+    mouse.x <= screen.position.x + screen.size.width &&
+    mouse.x >= screen.position.x &&
+    mouse.y <= screen.position.y + screen.size.height &&
+    mouse.y >= screen.position.y
   )
     return true;
 }
@@ -333,7 +372,7 @@ coverCv.addEventListener("mousedown", () => {
     new Construction(
       gridPositionX,
       gridPositionY,
-      consturctionType
+      constructionTitle
     )
   );
 });

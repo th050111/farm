@@ -5,6 +5,7 @@
 
 canvas {
   position: fixed;
+  display: none;
 }
 
 #game {
